@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tinder!</title>
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+    <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.10.4.custom.min.css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+</head>
+<body>
+    <h1>
+        <button class="command" data-command="loadSomeProfiles">Load Profiles</button>
+        Tinder!
+    </h1>
+    <div id="profiles"></div>
+    <div id="matches"></div>
+    <script type="text/template" id="profile">
+        <div class="profile" id="profile-<%= obj._id %>">
+            <h2>
+                <button class="command" data-command="passProfile" data-profileid="<%= obj._id %>">PASS</button>
+                <%= obj.name %> [<%= obj.distance_mi %>mi]
+                <button class="command" data-command="likeProfile" data-profileid="<%= obj._id %>">LIKE</button>
+            </h2>
+            <div class="photos">
+                <%
+                _.each(obj._photos, function (photo) {
+                %><div class="img-wrap"><img src="<%= photo %>" width="<%= obj._photoWidth %>" height="<%= obj._photoHeight %>" alt="<%= obj.name %>" /></div><%
+                });
+                %>
+            </div>
+            <div class="bio">
+                <%= (obj.bio + '').replace(/\n/g, '<br />') %>
+            </div>
+        </div>
+    </script>
+</body>
+</html>
